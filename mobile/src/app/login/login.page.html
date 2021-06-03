@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container espacement">
+    <h1 class="text-center">Connexion</h1>
+    <div class="img_logo text-center">
+      <img src="assets/bmb.png" alt="">
+    </div>
+    <div class="formulaire">
+      <form [formGroup]="user">
+        <ion-item class="ion-margin-bottom">
+          <ion-input type="text" formControlName="username" placeholder="Email"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-bottom">
+          <ion-input [type]="[passwordtype]" formControlName="password" placeholder="Password"></ion-input>
+        </ion-item>
+        <div class="form-group form-check ml-3" (click)="checkpassword()">
+          <input type="checkbox" formControlName="check" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Voir le mot de passe</label>
+        </div>
+        <p class="text-danger" *ngIf="iserror">Username ou Password Invalid</p>
+        <ion-button *ngIf="!isloading" expand="block" [disabled]="!user.valid" shape="round" (click)="login()" type="submit">Login
+        </ion-button>
+        <ion-button *ngIf="isloading" expand="block" shape="round" disabled (click)="login()" type="submit">Chargement...
+          <i class="fa fa-spinner fa-spin"></i>
+        </ion-button>
+      </form>
+    </div>
+  </div>
+  <!-- <div id="header">
+    <h1>Login</h1>
+    <img src="assets/bmb.png" />
+  </div>
+
+ -->
+</ion-content>

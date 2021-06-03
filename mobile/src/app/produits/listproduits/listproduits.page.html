@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Produits</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  <ion-searchbar></ion-searchbar>
+  <ion-grid>
+    <div class="row">
+      <div *ngFor="let item of Produits" class="col-12 col-lg-3 col-md-4 col-sm-6">
+        <ion-card>
+          <img src="{{commonData.urlImage + item.image}}" />
+          <ion-card-header>
+            <ion-card-subtitle>Categorie :{{item.categorie.nom}}</ion-card-subtitle>
+            <ion-card-title>Nom du produits : {{item.nom}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{item.detail}}
+          </ion-card-content>
+          <div class="row">
+            <div class="col-lg-12 col-12 border" style="background-color: red;">
+              <div class="action" (click)="deleteProd(item.id)">
+                <p>
+                  <ion-icon class="ion-icon" name="trash-outline"></ion-icon>
+                  Supprimer</p>
+              </div>
+            </div>
+          </div>
+        </ion-card>
+      </div>
+    </div>
+  </ion-grid>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="dark" (click)="addProduits()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

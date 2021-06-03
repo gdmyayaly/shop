@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>formulaire</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  <div class="loading" *ngIf="load">Loading&#8230;</div>
+  <ion-searchbar (keyup)="recherche($event.target.value)"></ion-searchbar>
+  <ion-grid>
+    <div class="row">
+      <div *ngFor="let item of DetailProduits" class="col-12 col-lg-4 col-md-4 col-sm-6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Formulaire Produits</ion-card-subtitle>
+            <ion-card-title class="text-center">Champs : <strong>{{item.nom}}</strong> </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <h4 class="desc"><strong>Type :</strong> <span>{{item.type}}</span></h4>
+            <div *ngIf="item.valeur.length!=0">
+              <h4>Les Valeurs sont</h4>
+              <ion-list *ngFor="let val of item.valeur">
+                <ion-item>
+                  <ion-label>{{val}}</ion-label>
+                  <ion-icon slot="end" color="danger" (click)="deleteval(item.id,val,item.nom)" name="trash-outline"></ion-icon>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-card-content>
+          <div class="row">
+            <div class="col-lg-12 col-12 border text-center pt-2" style="background-color: red;">
+              <div class="action" (click)="deleteDetailProduits(item.id)">
+                <p class="ion-icon">
+                  <ion-icon  name="trash-outline"></ion-icon>
+                  Supprimer</p>
+              </div>
+            </div>
+          </div>
+        </ion-card>
+      </div>
+    </div>
+  </ion-grid>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="dark" (click)="addInput()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

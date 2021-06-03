@@ -1,0 +1,78 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Ajout Produits</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()" color="danger">Fermer</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="loading" *ngIf="load">Loading&#8230;</div>
+  <div class="content mt-5">
+    <h3 class="text-center">Ajouter un produis</h3>
+    <form [formGroup]="produits">
+      <div class="form-group">
+        <label for="nom">Nom du produit</label>
+        <input type="text" formControlName="nom" class="form-control" id="nom" placeholder="Numéro produitsApp">
+      </div>
+      <div class="form-group">
+        <label for="categorie">Categorie</label>
+        <select class="form-control" id="categorie" formControlName="categorie">
+          <option *ngFor="let item of categorie" value="{{item.id}}">{{item.nom}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="detail">Brief description</label>
+        <textarea class="form-control" formControlName="detail"  id="detail" rows="1"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="longDetail">Description Complète</label>
+        <textarea class="form-control" formControlName="longDetail"  id="longDetail" rows="2"></textarea>
+      </div>
+      <!-- <div class="form-group" *ngFor="let item of DetailProduit; let index=index">
+        <label for="{{item.slud}}"  *ngIf="item.type!='multiple'">{{item.nom}}</label>
+        <label for="{{item.slud}}"  *ngIf="item.type=='multiple'"> Variation {{item.nom}}</label>
+        <textarea *ngIf="item.type=='text'" formControlName="{{item.slud}}" class="form-control" id="{{item.slud}}" placeholder="{{item.nom}}" rows="2"></textarea>
+        <input *ngIf="item.type=='chiffre'" type="number" formControlName="{{item.slud}}" class="form-control" id="{{item.slud}}" placeholder="{{item.nom}}">
+        <ion-list *ngIf="item.type=='multiple'">
+          <ion-item *ngFor="let entry of item.valeur; let index=index">
+            <ion-label>{{entry}}</ion-label>
+            <ion-checkbox slot="end" formControlName="check{{item.slud+index}}" ></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </div> -->
+      <div class="form-roup">
+        <input type="file" name="file" id="file" class="inputfile" #Image accept="image/" (change)="handleFileInput($event.target.files)" />
+        <label for="file">Mettre une image</label>
+      </div>
+      <div class="form-group" *ngIf="imageUrl!=''">
+        <label for="imgname">Nom de l'Image</label>
+        <textarea class="form-control" formControlName="imagename"  id="imgname" rows="1"></textarea>
+      </div>
+      <div class="form-group" *ngIf="imageUrl!=''">
+        <div class="img_preview" >
+            <img src="{{imageUrl}}" alt="">
+        </div>
+      </div>
+      <div class="form-roup" *ngIf="imageUrl!=''">
+        <input type="file" name="files" id="files" class="inputfile" multiple  #Image accept="image/" (change)="handleFileInputMultiple($event.target.files)" />
+        <label for="files">Autres images</label>
+      </div>
+       <div class="form-group" *ngIf="PreviewOtherImage.length!=0">
+         <div class="row">
+           <div class="col-lg-6 col-md-6 col-6" *ngFor="let item of PreviewOtherImage; let index=index">
+             <div class="img_view">
+              <img [src]="item" alt="">
+              <ion-button (click)="deleteMultiplePic(index)">
+                <ion-icon class="ion-icon" name="trash-outline"></ion-icon>
+                Supprimer
+              </ion-button>
+             </div>
+           </div>
+         </div>
+      </div> 
+      <button type="submit" class="btn btn-primary w-100" (click)="save()">Enregistrer</button>
+    </form>
+  </div>
+</ion-content>

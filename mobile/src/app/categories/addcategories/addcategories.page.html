@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>addcategories</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()" color="danger">Fermer</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="loading" *ngIf="load">Loading&#8230;</div>
+  <div class="container pt-5">
+    <form [formGroup]="categorie" class="m-2 formulaire">
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" class="form-control" formControlName="nom" id="nom" placeholder="Categorie">
+      </div>
+      <div class="form-group">
+        <label for="detail">Detail</label>
+        <textarea class="form-control" id="detail" formControlName="detail" rows="2"></textarea>
+      </div>
+      <div class="form-roup">
+        <input type="file" name="file" id="file" class="inputfile" #Image accept="image/" (change)="handleFileInput($event.target.files)" />
+        <label for="file">Mettre une image</label>
+      </div>
+      <div class="form-group" *ngIf="fileToUpload.length >0">
+        <label for="imagename">Nom de l'image</label>
+        <input type="text" class="form-control" formControlName="imagename" id="imagename"  placeholder="Photo">
+      </div>
+      <img class="img-preview" *ngIf="fileToUpload.length >0" [src]="imageUrl" [alt]="fileToUpload[fileToUpload.length -1].name">
+      <button type="submit" *ngIf="!isSouscat" class="btn btn-primary w-100 mt-5" [disabled]="!categorie.valid" (click)="Valider()">Ajouter Categorie</button>
+      <button type="submit" *ngIf="isSouscat" class="btn btn-primary w-100 mt-5" [disabled]="!categorie.valid" (click)="ValiderSousCat()">Ajouter Sous Categorie</button>
+      
+    </form>
+  </div>
+</ion-content>

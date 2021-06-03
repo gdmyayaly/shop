@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Catégories</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  <div class="loading" *ngIf="load">Loading&#8230;</div>
+  <ion-searchbar (keyup)="recherche($event.target.value)"></ion-searchbar>
+  <ion-grid>
+    <div class="row">
+      <div *ngFor="let item of Categorie" class="col-12 col-lg-4 col-md-4 col-sm-6">
+        <ion-card>
+          <img src="{{data.urlImage + item.image}}" />
+          <ion-card-header>
+            <ion-card-subtitle>Categorie</ion-card-subtitle>
+            <ion-card-title>{{item.nom}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{item.detail}}
+          </ion-card-content>
+          <ion-list *ngIf="item.sousCategories.length >=1">
+            <ion-list-header>
+              Sous Categorie
+            </ion-list-header>
+    
+            <ion-item>
+              <ion-avatar slot="start">
+                <img src="assets/bmb.png">
+              </ion-avatar>
+              <ion-label>
+                <h2>{{item.sousCategories[0].nom}}</h2>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+          <ion-button *ngIf="item.sousCategories.length >=0" expand="full" color="primary" (click)="showSousCat(item.id,item.nom)">Plus de sous categories</ion-button>
+          <hr>
+          <div class="row">
+            <div class="col-lg-6 col-6 border" style="background-color: red;">
+              <div class="action" (click)="deleteCat(item.id)">
+                <p>
+                  <ion-icon class="ion-icon" name="trash-outline"></ion-icon>
+                  Supprimer</p>
+              </div>
+            </div>
+            <div class="col-lg-6 col-6 border">
+              <div class="action" (click)="addSousCategorie(item.id)">
+                <p>
+                  <ion-icon class="ion-icon" name="add-circle-outline"></ion-icon>
+                  Sous Categories</p>
+              </div>
+            </div>
+
+          </div>
+        </ion-card>
+      </div>
+    </div>
+  </ion-grid>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="dark" (click)="addCategorie()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

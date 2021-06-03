@@ -1,0 +1,31 @@
+php bin/console doctrine:fixtures:load
+php bin/console doctrine:database:create
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
+
+
+composer create-project symfony/skeleton neldale
+php bin/console doctrine:database:create
+php bin/console make:user
+php bin/console make:form
+php bin/console make:entity
+php bin/console make:controller
+'csrf_protection' => false,
+composer require --dev orm-fixtures
+php bin/console doctrine:fixtures:load
+php bin/console doctrine:schema:update  --force
+php bin/console server:run
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+'mapped'=> false
+pour le git
+git init
+git add .
+git commit -m "first commit"
+git push -u origin master
+username=gdmyayaly
+composer require lexik/jwt-authentication-bundle
+mkdir -p config/jwt
+openssl genrsa -out config/jwt/private.pem -aes256 4096
+openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem

@@ -1,0 +1,29 @@
+<ion-content>
+  <div class="container mt-5">
+    <div class="row col-lg-12 mx-auto">
+      <div class="container">
+          <div class="row">
+            
+            <div class="col-lg-4 col-md-6 col-12" *ngFor="let item of items">
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-subtitle>Paramètre</ion-card-subtitle>
+                  <ion-card-title>Card Title</ion-card-title>
+                </ion-card-header>
+              
+                <ion-card-content>
+                  Keep close to Nature's heart... and break clear away, once in awhile,
+                  and climb a mountain or spend a week in the woods. Wash your spirit clean.
+                </ion-card-content>
+              </ion-card>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="dark" (click)="addProduitsInput()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

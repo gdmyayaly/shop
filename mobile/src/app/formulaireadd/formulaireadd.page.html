@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>formulaireadd</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()" color="danger">Fermer</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="loading" *ngIf="load">Loading&#8230;</div>
+  <h1 class="text-center">Detail produits</h1>
+  <div class="m-3">
+    <form [formGroup]="formulaire">
+      <div class="form-group">
+        <label for="nom">Nom du champs</label>
+        <input type="text" class="form-control" formControlName="nom" id="nom" placeholder="Exemple: prix">
+      </div>
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select class="form-control" id="type" formControlName="type">
+          <option *ngFor="let item of typeChamps" value="{{item}}">{{item}}</option>
+        </select>
+      </div>
+      <div *ngIf="formulaire.get('type').value=='multiple'">
+        <p>Les valeurs par défaut</p>
+        <div class="form-group row" *ngFor="let item of tabValeur; let index=index">
+          <div class="col-sm-8 col-8 col-lg-8">
+            <input type="text" class="form-control" formControlName="valeur{{item}}" placeholder="Valeur {{item+1}}">
+          </div>
+          <div class="col-sm-4 col-4 col-lg-4">
+            <ion-icon name="add-circle-outline" *ngIf="(index+1)==tabValeur.length" (click)="plusValeur()" class="plus"></ion-icon>
+            <ion-icon name="remove-circle-outline" *ngIf="(index!=0) || (tabValeur.length>=2)" (click)="removeValeur(index)" class="plus"></ion-icon>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary w-100" (click)="saveInput()">Submit</button>
+    </form>
+    </div>
+</ion-content>
